@@ -2,6 +2,7 @@ import socket from "../socket";
 import { getPlayerData } from "../storage";
 import O from "./O";
 import X from "./X";
+import clsx from "clsx";
 
 export default function Grade({
   room_id,
@@ -9,6 +10,7 @@ export default function Grade({
   player1_id,
   player2_id,
   block,
+  winnerPosition = [],
 }) {
   const player = getPlayerData();
 
@@ -32,7 +34,12 @@ export default function Grade({
 
     return (
       <div
-        className="bg-gray-200 rounded grid place-items-center"
+        className={clsx({
+          "bg-gray-200 rounded grid place-items-center": true,
+          "cursor-pointer hover:bg-gray-400 trnasition duration-300":
+            !Render && !block,
+          "bg-blue-300": winnerPosition?.includes(position),
+        })}
         onClick={handleClick}
       >
         {Render && <Render />}
@@ -41,7 +48,7 @@ export default function Grade({
   };
 
   return (
-    <div className="mx-auto grid grid-cols-3 grid-rows-3 gap-4 w-[500px] h-[500px] bg-gray-50 p-4 rounded">
+    <div className="mx-auto grid grid-cols-3 grid-rows-3 gap-4 max-w-[500px] aspect-square bg-gray-50 p-4 rounded">
       <Slot position="tl" />
       <Slot position="tm" />
       <Slot position="tr" />

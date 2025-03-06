@@ -1,8 +1,16 @@
+import { EnumStatus } from "../pages/Game";
 import callServer from "../server";
 import socket from "../socket";
 import { getPlayerData } from "../storage";
 import Button from "./Button";
 import { useNavigate } from "react-router-dom";
+
+const statusText = {
+  [EnumStatus.PLAYING]: "In game",
+  [EnumStatus.TIE]: "In game",
+  [EnumStatus.WAITING_PLAYER]: "Waiting player",
+  [EnumStatus.WIN]: "In game",
+};
 
 export default function RoomCard({ data: { id, player1, player2, status } }) {
   const nav = useNavigate();
@@ -23,17 +31,13 @@ export default function RoomCard({ data: { id, player1, player2, status } }) {
   };
 
   return (
-    <div className="bg-gray-100 rounded p-2">
-      <small>id: {id}</small>
-      <p>Status: {status}</p>
+    <div className="bg-gray-100 rounded p-4">
+      <p className="bg-green-500 text-white text-sm p-1 rounded w-fit">
+        {statusText[status]}
+      </p>
       <p>Player 1: {player1.name}</p>
       {player2 && <p>Player 2: {player2.name}</p>}
-      <Button
-        disabled={player2 || player2?.id === player.id}
-        onClick={handleEnterRoom}
-      >
-        Enter
-      </Button>
+      {!player2 && <Button onClick={handleEnterRoom}>Enter</Button>}
     </div>
   );
 }

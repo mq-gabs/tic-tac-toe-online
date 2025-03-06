@@ -1,10 +1,9 @@
 import X from "./X";
 
-export default function PlayerCard({ playerName, isPlayer1 }) {
+export default function PlayerCard({ playerName }) {
   return (
-    <div className="bg-gray-200 p-4 rounded">
+    <div className="bg-gray-200 px-4 py-2 rounded">
       <p>{playerName}</p>
-      {/* {isPlayer1 ? <X /> : <O />} */}
     </div>
   );
 }

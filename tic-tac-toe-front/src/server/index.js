@@ -14,7 +14,7 @@ export default async function callServer({ path, data, method = "GET" }) {
 
     return response.data;
   } catch (error) {
-    alert(error.toString());
+    console.error(error);
     return {
       error,
     };

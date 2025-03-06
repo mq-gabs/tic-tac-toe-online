@@ -25,6 +25,7 @@ class Room {
   };
   turn;
   winner = null;
+  winnerPosition = null;
 
   constructor() {
     this.status = EnumStatus.WAITING_PLAYER;
@@ -68,6 +69,8 @@ class Room {
       bm: null,
       br: null,
     };
+    this.winner = null;
+    this.winnerPosition = null;
 
     if (this.player1 && this.player2) {
       this.status = EnumStatus.PLAYING;
@@ -111,11 +114,6 @@ class Room {
   }
 
   updateStatus() {
-    if (Object.values(this.grade).filter((v) => !v).length === 0) {
-      this.status = EnumStatus.TIE;
-      return;
-    }
-
     const positions = [
       ["tl", "tm", "tr"],
       ["ml", "mm", "mr"],
@@ -140,7 +138,13 @@ class Room {
             ? this.player1
             : this.player2;
         this.status = EnumStatus.WIN;
+        this.winnerPosition = position;
       }
+    }
+
+    if (Object.values(this.grade).filter((v) => !v).length === 0) {
+      this.status = EnumStatus.TIE;
+      return;
     }
   }
 }

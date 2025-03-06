@@ -133,6 +133,7 @@ class Service {
       }
 
       room.player2 = null;
+      room.reset();
 
       return room;
     }

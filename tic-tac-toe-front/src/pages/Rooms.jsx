@@ -12,8 +12,6 @@ export default function Rooms() {
   const player = getPlayerData();
   const [rooms, setRooms] = useState([]);
 
-  console.log({ rooms });
-
   const loadPlayer = async () => {
     if (!player.id) return;
 
@@ -74,7 +72,7 @@ export default function Rooms() {
 
   return (
     <main>
-      <div className="max-w-[800px] mx-auto mt-4">
+      <div className="max-w-[800px] mx-auto mt-4 p-4">
         <Button onClick={createRoom}>New room</Button>
         {rooms.length !== 0 && (
           <ul className="flex flex-col gap-2 mt-4">
@@ -85,7 +83,9 @@ export default function Rooms() {
             ))}
           </ul>
         )}
-        {rooms.length === 0 && <p>No rooms yet...</p>}
+        {rooms.length === 0 && (
+          <p className="text-center text-gray-400">No rooms yet...</p>
+        )}
       </div>
     </main>
   );

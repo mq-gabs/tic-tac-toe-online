@@ -28,8 +28,8 @@ export default function GetName() {
   };
 
   return (
-    <main className="h-screen grid place-items-center">
-      <div className="flex flex-col gap-4 w-[400px] mx-auto border p-4">
+    <main className="h-screen grid place-items-center p-2">
+      <div className="flex flex-col gap-4 max-w-[400px] border p-4  w-full">
         <label htmlFor="name">Type your nickname</label>
         <input
           className="border p-2 rounded"
