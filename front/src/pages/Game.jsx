@@ -125,10 +125,23 @@ export default function Game() {
         <div className="flex justify-end mb-4">
           <Button onClick={handleExit}>Exit</Button>
         </div>
-        <GameStatus
-          status={room.status}
-          turnIsThisPlayer={room.turn === player.id}
-        />
+        {!room.winner && (
+          <GameStatus
+            status={room.status}
+            turnIsThisPlayer={room.turn === player.id}
+          />
+        )}
+        {room.winner && (
+          <p
+            className={clsx({
+              "text-5xl mb-4 mt-4 font-semibold text-center": true,
+              "text-green-500 animate-bounce": player.id === room.winner.id,
+              "text-red-500": player.id !== room.winner.id,
+            })}
+          >
+            You {player.id === room.winner.id ? "win!!!" : "lose..."}
+          </p>
+        )}
         <Grade
           room_id={room.id}
           grade={room.grade}
@@ -141,17 +154,6 @@ export default function Game() {
           <PlayerCard isPlayer1 playerName={room.player1.name} />
           {room.player2 && <PlayerCard playerName={room?.player2?.name} />}
         </div>
-        {room.winner && (
-          <p
-            className={clsx({
-              "text-3xl mb-2 mt-4 font-semibold text-center": true,
-              "text-green-500 animate-bounce": player.id === room.winner.id,
-              "text-red-500": player.id !== room.winner.id,
-            })}
-          >
-            You {player.id === room.winner.id ? "win!!!" : "lose..."}
-          </p>
-        )}
         {[EnumStatus.WIN, EnumStatus.TIE].includes(room.status) && (
           <div className="flex justify-center mt-4">
             <Button onClick={handleResetRoom}>Play again!</Button>
