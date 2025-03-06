@@ -38,7 +38,11 @@ function GameStatus({ status, turnIsThisPlayer }) {
   }
 
   return (
-    <p className="text-5xl mb-4 text-center font-bold text-prim">{text}</p>
+    <div className="mb-4 mt-4 flex justify-center">
+      <p className="text-5xl font-bold bg-prim text-white px-4 py-2 rounded">
+        {text}
+      </p>
+    </div>
   );
 }
 
@@ -132,15 +136,17 @@ export default function Game() {
           />
         )}
         {room.winner && (
-          <p
-            className={clsx({
-              "text-5xl mb-4 mt-4 font-semibold text-center": true,
-              "text-green-500 animate-bounce": player.id === room.winner.id,
-              "text-red-500": player.id !== room.winner.id,
-            })}
-          >
-            You {player.id === room.winner.id ? "win!!!" : "lose..."}
-          </p>
+          <div className="mb-4 mt-4 flex justify-center">
+            <p
+              className={clsx({
+                "text-5xl text-white font-semibold  bg-gray-50 px-4 py-2 rounded": true,
+                "bg-green-500 animate-bounce": player.id === room.winner.id,
+                "bg-red-500": player.id !== room.winner.id,
+              })}
+            >
+              You {player.id === room.winner.id ? "win!!!" : "lose..."}
+            </p>
+          </div>
         )}
         <Grade
           room_id={room.id}
