@@ -1,0 +1,20 @@
+services:
+  tic-tac-tor-server:
+    container_name: tic-tac-toe-server
+    image: tic-tac-toe-server-image
+    build:
+      context: server
+      dockerfile: Dockerfile
+    ports:
+      - 5000:5000
+    command: npm start
+  tic-tac-toe-front:
+    container_name: tic-tac-toe-front
+    image: tic-tac-toe-front-image
+    build:
+      context: front
+      dockerfile: Dockerfile
+    environment:
+      - VITE_SERVER_HOST=http://localhost:5000
+    ports:
+      - 8080:80
