@@ -1,4 +1,4 @@
-FROM node:22.14.0
+FROM node:22.14.0 AS node
 
 WORKDIR /app
 
@@ -13,4 +13,4 @@ RUN npm run build
 FROM nginx:1.27.4
 
 COPY nginx.conf /etc/nginx/nginx.conf
-COPY dist/ /usr/share/nginx/html
+COPY --from=node /app/dist/ /usr/share/nginx/html
